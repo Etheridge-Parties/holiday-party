@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>You're invited! 🎄</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Mountains+of+Christmas:wght@700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#b3202a; --card:#fffaf0; --ink:#3a2a22; --accent:#b3202a; --accent2:#1f6b3a; --gold:#c9972b; }
+  body.evergreen { --bg:#12402a; --accent:#12402a; --accent2:#b3202a; }
+  body.snowy     { --bg:#14264a; --accent:#14264a; --accent2:#b3202a; }
+
+  * { box-sizing:border-box; }
+  html, body { margin:0; min-height:100%; }
+  body {
+    font-family:'Quicksand', system-ui, sans-serif; color:var(--ink);
+    background-color:var(--bg); background-repeat:repeat; background-size:260px 260px;
+    display:flex; align-items:center; justify-content:center;
+    min-height:100vh; padding:28px 16px 90px; overflow-x:hidden;
+  }
+  body.snowy { background-image:linear-gradient(#0d1b38, #24427a) !important; background-size:cover; background-attachment:fixed; }
+
+  .card {
+    position:relative; z-index:2; width:100%; max-width:440px; text-align:center;
+    background:var(--card); border-radius:26px; padding:34px 26px 28px;
+    box-shadow:0 18px 50px rgba(0,0,0,.35); border:3px solid var(--gold);
+    outline:2px dashed rgba(201,151,43,.55); outline-offset:-12px;
+  }
+  .topper { font-size:44px; line-height:1; margin-bottom:6px; }
+  .small-caps { letter-spacing:.22em; text-transform:uppercase; font-size:12px; font-weight:700; color:var(--accent2); }
+  h1 { font-family:'Mountains of Christmas', cursive; font-size:44px; line-height:1.05; margin:10px 0 6px; color:var(--accent); }
+  h2 { font-family:'Mountains of Christmas', cursive; font-size:30px; margin:0 0 14px; color:var(--accent2); }
+  p  { margin:8px 0; font-size:16px; line-height:1.5; }
+  .details { margin:18px auto; padding:14px 10px; border-top:1px solid #e6d9bd; border-bottom:1px solid #e6d9bd; }
+  .details .big { font-weight:700; font-size:19px; }
+  .details .sub { font-size:14px; opacity:.8; }
+  .deadline { font-size:14px; font-weight:600; color:var(--accent2); }
+
+  .btns { display:flex; flex-direction:column; gap:12px; margin-top:18px; }
+  button {
+    font:inherit; font-weight:700; font-size:17px; cursor:pointer; border:none;
+    border-radius:999px; padding:15px 18px; transition:transform .08s ease, box-shadow .08s ease;
+  }
+  button:active { transform:scale(.97); }
+  .yes { background:#1f6b3a; color:#fff; box-shadow:0 5px 0 #124524; }
+  .no  { background:#fff; color:#8a2a2a; border:2px solid #d9b9b0; }
+  .count { display:flex; gap:10px; justify-content:center; margin:14px 0 4px; }
+  .count button { width:64px; height:64px; padding:0; font-size:22px; background:#fff; color:var(--ink); border:2px solid #d8c9a6; }
+  .count button.on { background:var(--gold); color:#fff; border-color:var(--gold); }
+  textarea { width:100%; font:inherit; font-size:15px; border:2px solid #e2d5b8; border-radius:14px; padding:10px 12px; margin-top:10px; resize:vertical; background:#fff; }
+  .link { background:none; color:var(--accent2); text-decoration:underline; font-size:14px; font-weight:600; padding:8px; margin-top:8px; }
+  .hidden { display:none !important; }
+
+  /* photo collage wallpaper */
+  body.collage { --bg:#3b0d12; --accent:#8d1620; --accent2:#1f6b3a; background-image:radial-gradient(circle at 50% 30%, #6d1620, #2a070b) !important; background-size:cover; background-attachment:fixed; }
+  .collage-wall { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; background:#120406; }
+  .collage-wall .tile { position:absolute; overflow:hidden; }
+  .collage-wall .tile > * { position:absolute; display:block; max-width:none; }
+  .collage-wall .tile > .bg { inset:-30px; background-size:cover; background-position:center; filter:blur(18px) brightness(.55); }
+  .collage-wall::after { content:""; position:fixed; inset:0; background:radial-gradient(ellipse at center, rgba(0,0,0,.55) 0%, rgba(0,0,0,.40) 45%, rgba(0,0,0,.12) 85%); }
+  body:not(.collage) .collage-wall { display:none; }
+  /* collage: no box, the words sit straight on the photos in bright green */
+  body.collage { --green:#3ee88a; --red:#ff3a4f; padding:60px 14px 110px; }
+  body.collage .card { background:none; border:none; outline:none; box-shadow:none; padding:0; max-width:560px;
+    color:var(--green); font-family:'Cormorant Garamond', Georgia, serif; font-weight:700;
+    text-shadow:0 1px 2px #000, 0 0 8px rgba(0,0,0,.95), 0 0 24px rgba(0,0,0,.85); }
+  body.collage .topper { font-family:'Playfair Display', serif; font-size:26px; color:var(--red); letter-spacing:.4em; margin-bottom:4px; }
+  body.collage .small-caps { font-family:'Playfair Display', serif; color:var(--red); font-size:15px; font-weight:700; letter-spacing:.32em; }
+  body.collage h1 { font-family:'Playfair Display', serif; font-style:italic; font-weight:500; color:var(--green); font-size:60px; margin:12px 0 8px; }
+  body.collage h2 { font-family:'Playfair Display', serif; font-style:italic; font-weight:500; color:var(--red); font-size:40px; }
+  body.collage p { font-size:24px; font-weight:700; line-height:1.35; }
+  body.collage p strong { display:inline-block; margin-top:4px; color:var(--red); font-family:'Playfair Display', serif; font-style:italic; font-weight:700; font-size:1.75em; line-height:1.1; }
+  body.collage .details { border:none; margin:12px auto; padding:6px; }
+  body.collage .details .big { font-family:'Playfair Display', serif; font-weight:700; font-size:26px; letter-spacing:.02em; }
+  body.collage .details .big + .big { color:var(--red); }
+  body.collage .details .sub { font-size:21px; font-style:italic; opacity:1; }
+  body.collage .deadline { color:var(--red); font-size:23px; font-style:italic; font-weight:700; }
+  body.collage button { font-family:'Playfair Display', serif; font-weight:700; letter-spacing:.03em; text-shadow:none; box-shadow:0 4px 18px rgba(0,0,0,.7); }
+  body.collage .btns { max-width:360px; margin-left:auto; margin-right:auto; }
+  body.collage .yes { background:var(--green); color:#04301a; }
+  body.collage .no  { background:#c8102e; color:#fff; border:1px solid rgba(255,255,255,.85); }
+  body.collage .link { color:var(--green); background:none; box-shadow:none; text-shadow:inherit; font-size:18px; }
+  body.collage textarea { text-shadow:none; }
+  body.collage .card { font-variant-numeric:lining-nums; }
+  @media (max-width:699px) {
+    body.collage h1 { font-size:46px; } body.collage h2 { font-size:32px; }
+    body.collage p { font-size:21px; } body.collage .details .big { font-size:22px; } body.collage .deadline { font-size:18px; } body.collage .btns button { font-size:15px; padding:14px 12px; }
+  }
+
+  /* framed option: car photos form the panel behind the text, videos wrap around it */
+  body.frame .collage-wall::after { background:rgba(0,0,0,.12); }
+  body.frame .card { width:auto; max-width:400px; padding:20px 20px 22px; }
+  body.frame .topper { font-size:20px; margin-bottom:0; }
+  body.frame h1 { font-size:52px; margin:6px 0 4px; }
+  body.frame p { margin:4px 0; }
+  body.frame .details { margin:6px auto; padding:2px; }
+  body.frame .btns { margin-top:12px; gap:10px; }
+  body.frame .deadline { font-size:20px; }
+  #panel { position:absolute; inset:0; z-index:-1; overflow:hidden; border-radius:6px; background:#120406;
+    box-shadow:0 0 0 1px rgba(255,255,255,.75), 0 0 0 7px rgba(0,0,0,.35), 0 24px 70px rgba(0,0,0,.85); }
+  #panel .tile { position:absolute; overflow:hidden; }
+  #panel .tile > * { position:absolute; display:block; max-width:none; }
+  #panel .tile > .bg { inset:-30px; background-size:cover; background-position:center; filter:blur(18px) brightness(.55); }
+  #panel::after { content:""; position:absolute; inset:0; background:radial-gradient(ellipse at center, rgba(0,0,0,.55), rgba(0,0,0,.30) 90%); }
+  body:not(.frame) #panel { display:none; }
+  @media (max-width:699px) {
+    body.frame .card { max-width:340px; padding:16px 10px 18px; }
+    body.frame h1 { font-size:38px; } body.frame .deadline { font-size:16px; }
+  }
+
+  /* music: a small button; tapping it opens Cher's official lyric video at the chorus */
+  .music { position:fixed; left:14px; bottom:14px; z-index:6; font-family:'Playfair Display', serif; font-style:italic;
+    font-size:14px; font-weight:500; padding:9px 16px; border-radius:999px; background:rgba(10,6,8,.72); color:#3ee88a;
+    border:1px solid rgba(62,232,138,.7); box-shadow:0 4px 16px rgba(0,0,0,.6); }
+  .music.on { color:#ff3a4f; border-color:rgba(255,58,79,.8); }
+  /* YouTube requires an embedded player of at least 200 x 200 px */
+  .player { position:fixed; left:14px; bottom:60px; z-index:6; width:356px; height:200px; border-radius:6px; overflow:hidden;
+    box-shadow:0 0 0 1px rgba(255,255,255,.7), 0 10px 30px rgba(0,0,0,.7); background:#000; }
+  @media (max-width:699px) { .player { right:14px; width:auto; } }
+  body.playing { padding-bottom:290px !important; }   /* lift the invitation clear of the player */
+  .player iframe { width:100%; height:100%; border:0; display:block; }
+
+  /* snow */
+  .flake { position:fixed; top:-20px; z-index:1; color:#fff; opacity:.85; pointer-events:none; animation:fall linear infinite; }
+  @keyframes fall { to { transform:translate3d(var(--drift), 110vh, 0) rotate(360deg); } }
+  .trees { position:fixed; left:0; right:0; bottom:0; height:120px; z-index:1; pointer-events:none; }
+  body:not(.snowy) .trees { display:none; }
+  @media (prefers-reduced-motion: reduce) { .flake { animation:none; top:auto; } }
+
+  .switcher { position:fixed; bottom:14px; left:50%; transform:translateX(-50%); z-index:5; background:rgba(255,255,255,.95); border-radius:999px; padding:6px; display:flex; gap:6px; box-shadow:0 6px 20px rgba(0,0,0,.3); }
+  .switcher button { font-size:13px; padding:8px 14px; background:transparent; color:#333; }
+  .switcher button.on { background:#333; color:#fff; }
+</style>
+</head>
+<body>
+
+<div class="collage-wall" id="wall" aria-hidden="true"></div>
+
+<main class="card" id="card">
+  <!-- Step 1: the invitation -->
+  <section id="invite">
+    <div class="topper">✦ ✦ ✦</div>
+    <div class="small-caps">You're invited</div>
+    <h1 id="greeting">Merry &amp; Bright!</h1>
+    <p>Come eat, drink &amp; be merry at a<br><strong>Holiday Party</strong></p>
+    <div class="details">
+      <div class="big">Saturday, December 5th</div>
+      <div class="big">7:00 pm</div>
+      <div class="sub">The address is in your text message</div>
+    </div>
+    <p class="deadline">Kindly RSVP by Wednesday, December 2nd</p>
+    <div class="btns">
+      <button class="yes" id="btnYes">Santa Baby says Let’s Celebrate</button>
+      <button class="no"  id="btnNo">Raincheck for 2027</button>
+    </div>
+  </section>
+
+  <!-- Step 2: headcount for a yes -->
+  <section id="howmany" class="hidden">
+    <div class="topper">🥂</div>
+    <h2>Yay! How many elves?</h2>
+    <div class="count" id="count">
+      <button data-n="1">1</button>
+      <button data-n="2" class="on">2</button>
+    </div>
+    <textarea id="note" rows="2" placeholder="Anything to tell the host? (optional)"></textarea>
+    <div class="btns">
+      <button class="yes" id="btnSend">Put us on the nice list ✨</button>
+    </div>
+    <button class="link" id="btnBack">← go back</button>
+  </section>
+
+  <!-- Step 3: confirmations -->
+  <section id="thanksYes" class="hidden">
+    <div class="topper">🎁</div>
+    <h2>You're on the nice list!</h2>
+    <p>Can't wait to see you<br><strong>Saturday, December 5th at 7:00 pm</strong>.</p>
+    <p>Wear something festive and bring your holiday cheer.</p>
+    <button class="link changeBtn">Change my answer</button>
+  </section>
+  <section id="thanksNo" class="hidden">
+    <div class="topper">☃️</div>
+    <h2>You'll be missed!</h2>
+    <p>We'll raise a glass of eggnog in your honor.<br>Merry Christmas!</p>
+    <button class="link changeBtn">Change my answer</button>
+  </section>
+</main>
+
+<svg class="trees" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+  <path fill="#0a1730" d="M0 120V80l40-50 40 50 30-35 30 35 50-65 50 65 30-30 30 30 45-55 45 55 35-40 35 40 50-70 50 70 30-30 30 30 45-50 45 50 40-60 40 60 30-30 30 30 50-65 50 65 35-40 35 40 45-55 45 55 30-30 30 30v40z"/>
+  <path fill="#fff" opacity=".9" d="M0 120v-14c150-16 300 8 450-4s300-14 450-2 200 4 300-4v24z"/>
+</svg>
+
+<button class="music hidden" id="music" type="button">♪ Stop the music</button>
+<div class="player hidden" id="player"></div>
+
+<div class="switcher hidden" id="switcher">
+  <button data-theme="classic">Classic red</button>
+  <button data-theme="evergreen">Evergreen &amp; gold</button>
+  <button data-theme="snowy">Snowy night</button>
+  <button data-theme="collage">Photo grid</button>
+  <button data-theme="frame">Framed</button>
+</div>
+
+<script>
+/* ---------- settings ---------- */
+const CONFIG = {
+  // Paste the Google Apps Script web-app URL here once it is deployed.
+  // While this is empty the page runs in preview mode and records nothing.
+  endpoint: "",
+  theme: "frame",             // frame (cars behind text, videos around) | collage (grid) | classic | evergreen | snowy
+  // Background tiles. w,h = the file's pixel size. box = the part that must stay in view,
+  // as fractions of width and height [left, top, right, bottom], picked from gridded frames.
+  // Music: Cher, "DJ Play a Christmas Song", official lyric video on Cher's YouTube channel.
+  // start = seconds into the video where the chorus begins (title line on screen at ~0:51).
+  music: { youtube: "-Z6AnCRjWX0", start: 50 },
+  wall: [
+    { video: "video/table.mp4", poster: "video/table.jpg", w: 720, h: 720,  box: [0.05, 0.15, 0.95, 1.00] }, // whole table shot incl. jello
+    { photo: "photos/mini.jpg",                            w: 825, h: 1100, box: [0.22, 0.33, 0.90, 0.85] }, // Mini + tree on roof
+    { photo: "photos/u01.jpg",                             w: 600, h: 800,  box: [0.00, 0.15, 1.00, 0.93] }, // car + gifts on roof
+    { video: "video/retro.mp4", poster: "video/retro.jpg", w: 720, h: 1112, box: [0.00, 0.05, 1.00, 0.85] }  // faces and trees
+  ]
+};
+
+/* ---------- who is this for? ---------- */
+const q = new URLSearchParams(location.search);
+const guestName = (q.get("to") || "").trim().slice(0, 60);
+const guestId   = (q.get("id") || "").trim().slice(0, 12);
+if (guestName) document.getElementById("greeting").textContent = guestName + "!";
+
+/* ---------- wallpaper ---------- */
+function tile(theme) {
+  const star = (x, y, s, c) => `<polygon fill="${c}" transform="translate(${x} ${y}) scale(${s})" points="0,-10 2.9,-3.1 10,-3.1 4.3,1.5 6.2,8.6 0,4.4 -6.2,8.6 -4.3,1.5 -10,-3.1 -2.9,-3.1"/>`;
+  const tree = (x, y, s, c, t) => `<g transform="translate(${x} ${y}) scale(${s})"><rect x="-3" y="22" width="6" height="8" fill="${t}"/><polygon fill="${c}" points="0,-22 12,-4 6,-4 16,10 8,10 20,24 -20,24 -8,10 -16,10 -6,-4 -12,-4"/></g>`;
+  const ball = (x, y, s, c, cap) => `<g transform="translate(${x} ${y}) scale(${s})"><rect x="-3" y="-15" width="6" height="5" rx="1" fill="${cap}"/><circle r="11" fill="${c}"/><circle cx="-4" cy="-4" r="3" fill="#fff" opacity=".45"/></g>`;
+  const flake = (x, y, s, c) => `<g transform="translate(${x} ${y}) scale(${s})" stroke="${c}" stroke-width="2" stroke-linecap="round">${[0,60,120].map(a => `<line x1="-10" x2="10" transform="rotate(${a})"/>`).join("")}</g>`;
+  const cane = (x, y, s, r) => `<g transform="translate(${x} ${y}) scale(${s}) rotate(${r})" fill="none" stroke-linecap="round"><path d="M0 22V-8a8 8 0 0 1 16 0" stroke="#fff" stroke-width="6"/><path d="M0 22V-8a8 8 0 0 1 16 0" stroke="#d6323c" stroke-width="6" stroke-dasharray="5 7"/></g>`;
+  let art = "";
+  if (theme === "evergreen") {
+    art = star(40,40,1.2,"#d9a93a") + ball(170,70,1,"#b3202a","#d9a93a") + star(215,180,.8,"#d9a93a") +
+          ball(70,190,.9,"#d9a93a","#f3e3b5") + flake(130,140,.8,"#2f7a4f") + star(125,15,.6,"#f3e3b5") + flake(235,25,.6,"#2f7a4f");
+  } else {
+    art = tree(45,50,1,"#1f6b3a","#6b4226") + cane(160,45,1,15) + star(225,95,.9,"#f1c75b") +
+          flake(110,130,.9,"#e98a8f") + ball(60,195,.95,"#fffaf0","#f1c75b") + tree(190,195,.8,"#1f6b3a","#6b4226") + flake(240,20,.6,"#e98a8f");
+  }
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="260" height="260" viewBox="0 0 260 260">${art}</svg>`;
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+}
+
+/* Background wall: a grid of near-square tiles. With 4 tiles each item shows once; with 6,
+   the two videos show twice, the copy started half-way through so it plays different shots. */
+const GRIDS = [
+  { cols: 2, rows: 2, cells: [[0, 0], [1, 0], [2, 0], [3, 0]] },                          // [item, start offset]
+  { cols: 3, rows: 2, cells: [[0, 0], [1, 0], [3, 0], [2, 0], [3, .5], [0, .5]] },
+  { cols: 2, rows: 3, cells: [[0, 0], [1, 0], [3, 0], [0, .5], [2, 0], [3, .5]] }
+];
+
+/* Fit one item in a W x H tile: scale so the whole crop box fits, allowing up to 12% extra
+   zoom (which may trim the box edges) to avoid empty bands, and centre the box, clamped so no
+   empty edge shows where the picture is big enough. Any band left is filled by a blurred copy.
+   Returns placement and the share of the tile the sharp picture covers. */
+function fitItem(t, W, H) {
+  const [x0, y0, x1, y1] = t.box;
+  const bw = (x1 - x0) * t.w, bh = (y1 - y0) * t.h;
+  const sBox = Math.min(W / bw, H / bh), sCover = Math.max(W / t.w, H / t.h);
+  const s = Math.min(Math.max(sBox, sCover), sBox * 1.12);
+  const dw = t.w * s, dh = t.h * s;
+  const place = (D, T, a, b) => D >= T ? Math.min(0, Math.max(T - D, T / 2 - (a + b) / 2 * D)) : (T - D) / 2;
+  const left = place(dw, W, x0, x1), top = place(dh, H, y0, y1);
+  return { dw, dh, left, top, fill: Math.min(dw, W) * Math.min(dh, H) / (W * H) };
+}
+
+function gridSize(G) {
+  const gap = 4;
+  return { W: (innerWidth - gap * (G.cols - 1)) / G.cols, H: (innerHeight - gap * (G.rows - 1)) / G.rows, gap };
+}
+
+function chooseGrid() {
+  let best = null;
+  for (const G of GRIDS) {
+    const { W, H } = gridSize(G);
+    const score = Math.min(...G.cells.map(([i]) => fitItem(CONFIG.wall[i], W, H).fill))
+                  - 0.02 * (G.cells.length - 4);   // small preference for fewer, larger tiles
+    if (!best || score > best.score) best = { G, score };
+  }
+  return best.G;
+}
+
+function makeTile(t, offset, still) {
+  const tile = document.createElement("div"); tile.className = "tile";
+  const bg = document.createElement("div"); bg.className = "bg";
+  bg.style.backgroundImage = `url("${t.poster || t.photo}")`;
+  let el;
+  if (t.video) {
+    el = document.createElement("video");
+    el.muted = true; el.loop = true; el.playsInline = true; el.autoplay = !still;
+    el.setAttribute("muted", ""); el.setAttribute("playsinline", "");
+    el.poster = t.poster; el.preload = "auto"; el.src = t.video;
+    if (offset) {
+      const sync = () => {   // keep this copy a fixed share of the loop behind the first copy
+        const first = [...document.querySelectorAll("#wall video")].find(v => v !== el && v.src === el.src);
+        if (first && el.duration) el.currentTime = (first.currentTime + el.duration * offset) % el.duration;
+      };
+      el.addEventListener("playing", sync, { once: true });
+      el.addEventListener("loadeddata", sync, { once: true });
+    }
+  } else {
+    el = document.createElement("img"); el.src = t.photo; el.alt = "";
+  }
+  tile.append(bg, el);
+  return tile;
+}
+
+function placeTile(tile, t, x, y, W, H) {
+  const f = fitItem(t, W, H);
+  Object.assign(tile.style, { left: x + "px", top: y + "px", width: W + "px", height: H + "px" });
+  Object.assign(tile.lastChild.style, { width: f.dw + "px", height: f.dh + "px", left: f.left + "px", top: f.top + "px" });
+}
+
+/* Framed option. Top half of the screen: the retro video; bottom half: the table video.
+   The car panel sits on the seam, so each video shows as a U around it (upside down on top).
+   On wide screens a band holds several copies side by side, started at even shares of the
+   loop, so each copy keeps close to its crop box's shape. */
+const FRAME = { top: 3, bottom: 0, panel: [1, 2] };   // indices into CONFIG.wall
+let frameKey = "";
+function buildFrame() {
+  const wall = document.getElementById("wall"), Wv = innerWidth, Hb = innerHeight / 2;
+  const copies = i => { const [x0, y0, x1, y1] = CONFIG.wall[i].box;
+    const a = (x1 - x0) * CONFIG.wall[i].w / ((y1 - y0) * CONFIG.wall[i].h);
+    return Math.max(1, Math.round(Wv / (Hb * a))); };
+  const nTop = copies(FRAME.top), nBot = copies(FRAME.bottom), key = nTop + "/" + nBot;
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (key !== frameKey) {
+    frameKey = key; wallGrid = null; wall.innerHTML = "";
+    for (let k = 0; k < nTop; k++) wall.appendChild(makeTile(CONFIG.wall[FRAME.top], k / nTop, still));
+    for (let k = 0; k < nBot; k++) wall.appendChild(makeTile(CONFIG.wall[FRAME.bottom], k / nBot, still));
+  }
+  const gap = 4, tiles = [...wall.children];
+  const band = (n, i, y, from) => { const W = (Wv - gap * (n - 1)) / n;
+    for (let k = 0; k < n; k++) placeTile(tiles[from + k], CONFIG.wall[i], k * (W + gap), y, W, Hb - gap / 2); };
+  band(nTop, FRAME.top, 0, 0);
+  band(nBot, FRAME.bottom, Hb + gap / 2, nTop);
+
+  // the panel: two car photos side by side or stacked, whichever keeps more of each sharp
+  const card = document.getElementById("card");
+  let panel = document.getElementById("panel");
+  if (!panel) {
+    panel = document.createElement("div"); panel.id = "panel"; panel.setAttribute("aria-hidden", "true");
+    FRAME.panel.forEach(i => panel.appendChild(makeTile(CONFIG.wall[i], 0, still)));
+    card.prepend(panel);
+    new ResizeObserver(() => { if (document.body.classList.contains("frame")) layoutPanel(); }).observe(card);
+  }
+  layoutPanel();
+}
+
+function layoutPanel() {
+  const panel = document.getElementById("panel"), W = panel.clientWidth, H = panel.clientHeight, g = 3;
+  if (!W || !H) return;
+  const [a, b] = FRAME.panel.map(i => CONFIG.wall[i]);
+  const side = Math.min(fitItem(a, (W - g) / 2, H).fill, fitItem(b, (W - g) / 2, H).fill);
+  const stack = Math.min(fitItem(a, W, (H - g) / 2).fill, fitItem(b, W, (H - g) / 2).fill);
+  const [ta, tb] = panel.children;
+  if (false) { const w = (W - g) / 2; placeTile(ta, a, 0, 0, w, H); placeTile(tb, b, w + g, 0, w, H); }
+  else { const h = (H - g) / 2; placeTile(ta, a, 0, 0, W, h); placeTile(tb, b, 0, h + g, W, h); }
+}
+
+let wallGrid = null;
+function buildWall() {
+  const G = chooseGrid();
+  if (G === wallGrid) { layoutWall(); return; }
+  wallGrid = G; frameKey = "";
+  const wall = document.getElementById("wall"); wall.innerHTML = "";
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  G.cells.forEach(([i, offset]) => { wall.appendChild(makeTile(CONFIG.wall[i], offset, still)); });
+  layoutWall();
+}
+addEventListener("resize", () => {
+  if (document.body.classList.contains("frame")) buildFrame();
+  else if (document.body.classList.contains("collage")) buildWall();
+});
+
+function layoutWall() {
+  const G = wallGrid, { W, H, gap } = gridSize(G);
+  [...document.getElementById("wall").children].forEach((tile, k) => {
+    const f = fitItem(CONFIG.wall[G.cells[k][0]], W, H);
+    const c = k % G.cols, r = Math.floor(k / G.cols);
+    Object.assign(tile.style, { left: c * (W + gap) + "px", top: r * (H + gap) + "px", width: W + "px", height: H + "px" });
+    Object.assign(tile.lastChild.style, { width: f.dw + "px", height: f.dh + "px", left: f.left + "px", top: f.top + "px" });
+  });
+}
+
+function setTheme(theme) {
+  const playing = document.body.classList.contains("playing");
+  document.body.className = theme === "frame" ? "collage frame" : theme;
+  if (playing) document.body.classList.add("playing");
+  if (theme === "collage") buildWall();
+  if (theme === "frame") buildFrame();
+  document.body.style.backgroundImage = (theme === "snowy" || theme === "collage" || theme === "frame") ? "" : tile(theme);
+  document.querySelectorAll(".flake").forEach(f => f.remove());
+  const n = theme === "snowy" ? 46 : (theme === "collage" || theme === "frame") ? 0 : 14;
+  for (let i = 0; i < n; i++) {
+    const f = document.createElement("div");
+    f.className = "flake"; f.textContent = "❄";
+    f.style.left = (Math.random() * 100) + "vw";
+    f.style.fontSize = (8 + Math.random() * 16) + "px";
+    f.style.setProperty("--drift", (Math.random() * 80 - 40) + "px");
+    f.style.animationDuration = (8 + Math.random() * 10) + "s";
+    f.style.animationDelay = (-Math.random() * 18) + "s";
+    document.body.appendChild(f);
+  }
+  document.querySelectorAll("#switcher button").forEach(b => b.classList.toggle("on", b.dataset.theme === theme));
+  if (typeof fitName === "function") setTimeout(fitName, 0);
+}
+/* ---------- one-line name ---------- */
+function fitName() {
+  const h = document.getElementById("greeting");
+  h.style.fontSize = ""; h.style.whiteSpace = "nowrap";
+  const base = parseFloat(getComputedStyle(h).fontSize), room = h.parentElement.clientWidth;
+  let size = base;
+  while (h.scrollWidth > room && size > base * 0.6) { size -= 1; h.style.fontSize = size + "px"; }
+  if (h.scrollWidth > room) h.style.whiteSpace = "normal";   // very long names may still wrap
+}
+addEventListener("resize", fitName);
+document.fonts && document.fonts.ready.then(fitName);
+
+/* ---------- music ---------- */
+// The song starts when the guest taps Yes (browsers allow sound only after a tap).
+// While it plays, the YouTube player stays visible (YouTube's embed rules require that)
+// and the small button stops it; after that the button can play it again.
+let musicOn = false;
+function startMusic() {
+  if (!CONFIG.music || !CONFIG.music.youtube || musicOn) return;
+  const box = document.getElementById("player"), btn = document.getElementById("music");
+  const f = document.createElement("iframe");
+  f.src = `https://www.youtube-nocookie.com/embed/${CONFIG.music.youtube}?start=${CONFIG.music.start}&autoplay=1&playsinline=1&rel=0`;
+  f.allow = "autoplay; encrypted-media; picture-in-picture";
+  f.title = "Cher, DJ Play a Christmas Song";
+  box.appendChild(f); box.classList.remove("hidden"); document.body.classList.add("playing");
+  btn.classList.remove("hidden"); btn.classList.add("on"); btn.textContent = "♪ Stop the music";
+  musicOn = true;
+}
+function stopMusic() {
+  sessionStorage.musicStopped = "1";   // a guest who stops it is not interrupted again
+  const box = document.getElementById("player"), btn = document.getElementById("music");
+  box.innerHTML = ""; box.classList.add("hidden"); document.body.classList.remove("playing");
+  btn.classList.remove("on"); btn.textContent = "♪ Play Cher again";
+  musicOn = false;
+}
+document.getElementById("music").onclick = () => { if (musicOn) stopMusic(); else { delete sessionStorage.musicStopped; startMusic(); } };
+
+const themes = ["classic", "evergreen", "snowy", "collage", "frame"];
+setTimeout(fitName, 0);
+setTheme(themes.includes(q.get("theme")) ? q.get("theme") : CONFIG.theme);
+if (q.get("preview") === "1") {
+  document.getElementById("switcher").classList.remove("hidden");
+  document.querySelectorAll("#switcher button").forEach(b => b.onclick = () => setTheme(b.dataset.theme));
+}
+
+/* ---------- RSVP flow ---------- */
+const $ = id => document.getElementById(id);
+const sections = ["invite", "howmany", "thanksYes", "thanksNo"];
+const show = id => sections.forEach(s => $(s).classList.toggle("hidden", s !== id));
+const storeKey = "xmas2026-rsvp-" + (guestId || "guest");
+let headcount = 2;
+
+document.querySelectorAll("#count button").forEach(b => b.onclick = () => {
+  headcount = +b.dataset.n;
+  document.querySelectorAll("#count button").forEach(x => x.classList.toggle("on", x === b));
+});
+
+async function send(answer) {
+  const payload = { id: guestId, name: guestName, answer, count: answer === "yes" ? headcount : 0, note: $("note").value.trim().slice(0, 300) };
+  try { localStorage.setItem(storeKey, answer); } catch (e) {}
+  if (CONFIG.endpoint) {
+    try {
+      // text/plain + no-cors keeps this a "simple" request, which Apps Script accepts without a preflight.
+      await fetch(CONFIG.endpoint, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
+    } catch (e) {
+      alert("Hmm, the reindeer dropped that one. Please try again, or just text your answer!");
+      return;
+    }
+  }
+  show(answer === "yes" ? "thanksYes" : "thanksNo");
+}
+
+$("btnYes").onclick  = () => { show("howmany"); if (!sessionStorage.musicStopped) startMusic(); };
+$("btnBack").onclick = () => show("invite");
+$("btnSend").onclick = () => send("yes");
+$("btnNo").onclick   = () => send("no");
+document.querySelectorAll(".changeBtn").forEach(b => b.onclick = () => show("invite"));
+
+try {
+  const prior = localStorage.getItem(storeKey);
+  if (prior === "yes") show("thanksYes");
+  if (prior === "no")  show("thanksNo");
+} catch (e) {}
+</script>
+</body>
+</html>
