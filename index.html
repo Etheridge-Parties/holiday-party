@@ -94,11 +94,11 @@
   body.frame .collage-wall::after { background:rgba(0,0,0,.12); }
   body.frame .card { width:auto; max-width:400px; padding:20px 20px 22px; }
   body.frame .topper { font-size:20px; margin-bottom:0; }
-  body.frame h1 { font-size:52px; margin:6px 0 4px; }
+  body.frame h1 { font-size:52px; margin:6px 0 4px; color:#fff; }
   body.frame p { margin:4px 0; }
   body.frame .details { margin:6px auto; padding:2px; }
   body.frame .btns { margin-top:12px; gap:10px; }
-  body.frame .deadline { font-size:20px; }
+  body.frame .deadline { font-size:20px; color:#fff; }
   #panel { position:absolute; inset:0; z-index:-1; overflow:hidden; border-radius:6px; background:#120406;
     box-shadow:0 0 0 1px rgba(255,255,255,.75), 0 0 0 7px rgba(0,0,0,.35), 0 24px 70px rgba(0,0,0,.85); }
   #panel .tile { position:absolute; overflow:hidden; }
@@ -144,7 +144,7 @@
   <section id="invite">
     <div class="topper">✦ ✦ ✦</div>
     <div class="small-caps">You're invited</div>
-    <h1 id="greeting">Merry &amp; Bright!</h1>
+    <h1 id="greeting">Merry &amp; Bright</h1>
     <p>Come eat, drink &amp; be merry at a<br><strong>Holiday Party</strong></p>
     <div class="details">
       <div class="big">Saturday, December 5th</div>
@@ -229,7 +229,7 @@ const CONFIG = {
 const q = new URLSearchParams(location.search);
 const guestName = (q.get("to") || "").trim().slice(0, 60);
 const guestId   = (q.get("id") || "").trim().slice(0, 12);
-if (guestName) document.getElementById("greeting").textContent = guestName + "!";
+if (guestName) document.getElementById("greeting").textContent = guestName;
 
 /* ---------- wallpaper ---------- */
 function tile(theme) {
