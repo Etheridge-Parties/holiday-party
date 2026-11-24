@@ -111,17 +111,6 @@
     body.frame h1 { font-size:38px; } body.frame .deadline { font-size:16px; }
   }
 
-  /* music: a small button; tapping it opens Cher's official lyric video at the chorus */
-  .music { position:fixed; left:14px; bottom:14px; z-index:6; font-family:'Playfair Display', serif; font-style:italic;
-    font-size:14px; font-weight:500; padding:9px 16px; border-radius:999px; background:rgba(10,6,8,.72); color:#3ee88a;
-    border:1px solid rgba(62,232,138,.7); box-shadow:0 4px 16px rgba(0,0,0,.6); }
-  .music.on { color:#ff3a4f; border-color:rgba(255,58,79,.8); }
-  /* YouTube requires an embedded player of at least 200 x 200 px */
-  .player { position:fixed; left:14px; bottom:60px; z-index:6; width:356px; height:200px; border-radius:6px; overflow:hidden;
-    box-shadow:0 0 0 1px rgba(255,255,255,.7), 0 10px 30px rgba(0,0,0,.7); background:#000; }
-  @media (max-width:699px) { .player { right:14px; width:auto; } }
-  body.playing { padding-bottom:290px !important; }   /* lift the invitation clear of the player */
-  .player iframe { width:100%; height:100%; border:0; display:block; }
 
   /* snow */
   .flake { position:fixed; top:-20px; z-index:1; color:#fff; opacity:.85; pointer-events:none; animation:fall linear infinite; }
@@ -194,8 +183,6 @@
   <path fill="#fff" opacity=".9" d="M0 120v-14c150-16 300 8 450-4s300-14 450-2 200 4 300-4v24z"/>
 </svg>
 
-<button class="music hidden" id="music" type="button">♪ Stop the music</button>
-<div class="player hidden" id="player"></div>
 
 <div class="switcher hidden" id="switcher">
   <button data-theme="classic">Classic red</button>
@@ -214,9 +201,6 @@ const CONFIG = {
   theme: "frame",             // frame (cars behind text, videos around) | collage (grid) | classic | evergreen | snowy
   // Background tiles. w,h = the file's pixel size. box = the part that must stay in view,
   // as fractions of width and height [left, top, right, bottom], picked from gridded frames.
-  // Music: Cher, "DJ Play a Christmas Song", official lyric video on Cher's YouTube channel.
-  // start = seconds into the video where the chorus begins (title line on screen at ~0:51).
-  music: { youtube: "-Z6AnCRjWX0", start: 50 },
   wall: [
     { video: "video/table.mp4", poster: "video/table.jpg", w: 720, h: 720,  box: [0.05, 0.15, 0.95, 1.00] }, // whole table shot incl. jello
     { photo: "photos/mini.jpg",                            w: 825, h: 1100, box: [0.22, 0.33, 0.90, 0.85] }, // Mini + tree on roof
@@ -393,9 +377,7 @@ function layoutWall() {
 }
 
 function setTheme(theme) {
-  const playing = document.body.classList.contains("playing");
   document.body.className = theme === "frame" ? "collage frame" : theme;
-  if (playing) document.body.classList.add("playing");
   if (theme === "collage") buildWall();
   if (theme === "frame") buildFrame();
   document.body.style.backgroundImage = (theme === "snowy" || theme === "collage" || theme === "frame") ? "" : tile(theme);
@@ -426,30 +408,6 @@ function fitName() {
 addEventListener("resize", fitName);
 document.fonts && document.fonts.ready.then(fitName);
 
-/* ---------- music ---------- */
-// The song starts when the guest taps Yes (browsers allow sound only after a tap).
-// While it plays, the YouTube player stays visible (YouTube's embed rules require that)
-// and the small button stops it; after that the button can play it again.
-let musicOn = false;
-function startMusic() {
-  if (!CONFIG.music || !CONFIG.music.youtube || musicOn) return;
-  const box = document.getElementById("player"), btn = document.getElementById("music");
-  const f = document.createElement("iframe");
-  f.src = `https://www.youtube-nocookie.com/embed/${CONFIG.music.youtube}?start=${CONFIG.music.start}&autoplay=1&playsinline=1&rel=0`;
-  f.allow = "autoplay; encrypted-media; picture-in-picture";
-  f.title = "Cher, DJ Play a Christmas Song";
-  box.appendChild(f); box.classList.remove("hidden"); document.body.classList.add("playing");
-  btn.classList.remove("hidden"); btn.classList.add("on"); btn.textContent = "♪ Stop the music";
-  musicOn = true;
-}
-function stopMusic() {
-  sessionStorage.musicStopped = "1";   // a guest who stops it is not interrupted again
-  const box = document.getElementById("player"), btn = document.getElementById("music");
-  box.innerHTML = ""; box.classList.add("hidden"); document.body.classList.remove("playing");
-  btn.classList.remove("on"); btn.textContent = "♪ Play Cher again";
-  musicOn = false;
-}
-document.getElementById("music").onclick = () => { if (musicOn) stopMusic(); else { delete sessionStorage.musicStopped; startMusic(); } };
 
 const themes = ["classic", "evergreen", "snowy", "collage", "frame"];
 setTimeout(fitName, 0);
@@ -486,7 +444,7 @@ async function send(answer) {
   show(answer === "yes" ? "thanksYes" : "thanksNo");
 }
 
-$("btnYes").onclick  = () => { show("howmany"); if (!sessionStorage.musicStopped) startMusic(); };
+$("btnYes").onclick  = () => show("howmany");
 $("btnBack").onclick = () => show("invite");
 $("btnSend").onclick = () => send("yes");
 $("btnNo").onclick   = () => send("no");
